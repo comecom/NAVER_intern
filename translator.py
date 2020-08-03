@@ -76,3 +76,30 @@ if len(bin_Error) != 0:
         print(line)
 
 
+#UNK data refinement
+unk_ws.cell(1, 1, 'contents')
+unk_ws.cell(1, 2, 'sentiment')
+for line in get_row:
+    if line[1].value == 'UNK':
+        unk_ws.append([line[0].value, line[1].value])
+
+
+unk_wb.save('/Users/user/Desktop/unk_data.xlsx')
+
+unk_rb = load_workbook('/Users/user/Desktop/unk_data.xlsx')
+unk_sb = unk_rb['Sheet']
+
+row_range = unk_sb[2:count_UNK+1]
+UNK = 0
+unk_Error = []
+for line in row_range:
+    if line[1].value == 'UNK':
+        UNK += 1
+    else:
+        unk_Error.append(line)
+
+print("UNK : {}".format(UNK))
+
+if len(unk_Error) != 0:
+    for line in unk_Error:
+        print(line)
