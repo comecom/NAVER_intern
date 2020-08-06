@@ -16,22 +16,22 @@ write_ws = write_wb.active
 write_ws.cell(1, 1, 'contents')
 write_ws.cell(1, 2, 'sentiment')
 
-get_row = load_ws['A2':'B95877']
+get_row = load_ws['A2':'B96338']
 
 for line in get_row:
     #print(line[0].value)
-    str = line[0].value
+    str_ = str(line[0].value)
     for name in names:
-        if name in str:
-            str = str.replace(name, "XXX")
+        if name in str_:
+            str_ = str_.replace(name, "XXX")
         if len(name) >= 3:
             first_name = name[1:]
-            if first_name in str:
-                str = str.replace(first_name, "XXX")
+            if first_name in str_:
+                str_ = str_.replace(first_name, "XXX")
     print(line)
-    write_ws.append([str, line[1].value])
+    write_ws.append([str_, line[1].value])
 
-for name in names:
-    write_ws.append([name, 'UNK'])
+#for name in names:
+ #   write_ws.append([name, 'UNK'])
 
-write_wb.save('/Users/user/Desktop/train_rename.xlsx')
+write_wb.save('/Users/user/Desktop/PN.xlsx')
